@@ -1,0 +1,1 @@
+project( spamm-miniapp Fortran )
