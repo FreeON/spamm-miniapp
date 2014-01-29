@@ -3,3 +3,7 @@ add_executable( spamm
   )
 
 target_link_libraries( spamm spammpack )
+
+install( TARGETS spamm
+  RUNTIME DESTINATION bin
+  )
