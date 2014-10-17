@@ -4,6 +4,8 @@ add_executable( mini-spamm
   mini-spamm.F90
   parser.F90
   parser.c
+  parser_wrapper.c
+  strings.F90
   )
 
 target_link_libraries( mini-spamm ${FLEX_LIBRARIES} )

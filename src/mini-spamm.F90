@@ -23,4 +23,7 @@ program mini_spamm
   call get_command_argument(1, input_file)
   control = parse_input(input_file)
 
+  call log_info("parsed input file")
+  call print_geometry(control%geometry)
+
 end program mini_spamm
