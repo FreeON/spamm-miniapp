@@ -3,9 +3,9 @@ module parser
 
   implicit none
 
-  type control
+  type control_t
     integer :: i
-  end type control
+  end type control_t
 
   !> The C interface to the Bison parser.
   interface
@@ -19,9 +19,12 @@ contains
   !> Parse the input file.
   !!
   !! @return A parser::control object.
-  function parse_input ()
+  function parse_input (filename)
 
-    type(control) :: parse_input
+    type(control_t) :: parse_input
+    character(len = *), intent(in) :: filename
+
+    call yyparse()
 
   end function parse_input
 

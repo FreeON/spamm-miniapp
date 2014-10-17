@@ -13,8 +13,14 @@ program mini_spamm
 
   implicit none
 
+  character(len = 1000) :: input_file
+  type(control_t) :: control
+
   if(command_argument_count() /= 1) then
     call log_fatal("missing input file")
   endif
+
+  call get_command_argument(1, input_file)
+  control = parse_input(input_file)
 
 end program mini_spamm

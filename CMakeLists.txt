@@ -11,6 +11,9 @@ if( NOT BISON_FOUND )
   message( FATAL_ERROR "I need the bison parser generator" )
 endif()
 
+set( PARSER_DEBUG FALSE
+  CACHE BOOL "Debug the input file parser" )
+
 include( FindDoxygen )
 if( DOXYGEN_FOUND )
   configure_file( Doxyfile.in Doxyfile )
