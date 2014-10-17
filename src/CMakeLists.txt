@@ -1,9 +1,7 @@
-add_executable( spamm
-  spamm.F90
+add_executable( mini-spamm
+  mini-spamm.F90
   )
 
-target_link_libraries( spamm spammpack )
-
-install( TARGETS spamm
+install( TARGETS mini-spamm
   RUNTIME DESTINATION bin
   )
