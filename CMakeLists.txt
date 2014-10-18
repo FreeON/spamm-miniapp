@@ -21,4 +21,13 @@ if( DOXYGEN_FOUND )
     COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile )
 endif()
 
+if( NOT CMAKE_BUILD_TYPE )
+  set( CMAKE_BUILD_TYPE Debug )
+endif()
+
+if( CMAKE_Fortran_COMPILER_ID STREQUAL "GNU" )
+  set( CMAKE_C_FLAGS_DEBUG "-O0 -g" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all" )
+endif()
+
 add_subdirectory( src )

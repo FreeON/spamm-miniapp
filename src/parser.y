@@ -81,6 +81,8 @@ geometry: BEGIN_GEOMETRY atom_list END_GEOMETRY
           $$ = calloc(1, sizeof(struct atomlist_t));
           $$->number_atoms = $2->number_atoms;
           $$->atoms = $2->atoms;
+          /* Call up to parser.F90 */
+          close_geometry();
         }
         ;
 
@@ -114,6 +116,7 @@ atom: ID float_value float_value float_value
         $$->x[0] = $2;
         $$->x[1] = $3;
         $$->x[2] = $4;
+        /* Call up into parser.F90 */
         parser_add_atom($1, &$2, &$3, &$4);
       }
       ;

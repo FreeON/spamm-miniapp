@@ -17,6 +17,8 @@ module parser
   !> The parsed control object. We keep this here so we can call back from the parser and modify it.
   type(control_t), save :: control_temp
 
+  logical, save :: geometry_set
+
 contains
 
   !> Parse the input file.
@@ -30,7 +32,9 @@ contains
     character(len = :), allocatable :: buffer
     integer :: i
 
+    geometry_set = .false.
     call yyparse()
+    call parse_input%set(control_temp)
 
   end function parse_input
 
@@ -50,10 +54,25 @@ contains
         atom_name(i:i) = name(i)
       endif
     enddo
+
     call log_debug("adding "//trim(atom_name)//" at "// &
-      to_string(x)//" "//to_string(y)//" "//to_string(z))
-    call control_temp%add_atom(atom_name, x, y, z)
+      to_string(x)//" "// &
+      to_string(y)//" "// &
+      to_string(z))
+    call control_temp%add_atom(atom_name, [ x, y, z ])
 
   end subroutine parser_add_atom
+
+  subroutine close_geometry () bind(C, name = "close_geometry")
+
+    use, intrinsic :: iso_C_binding
+
+    if(geometry_set) then
+      call log_fatal("duplicate geometry block")
+    endif
+
+    geometry_set = .true.
+
+  end subroutine close_geometry
 
 end module parser

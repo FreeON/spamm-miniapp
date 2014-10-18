@@ -24,6 +24,7 @@ module control_class
 
     procedure, pass :: print => print_control
     procedure, pass :: add_atom => add_atom
+    procedure, pass :: set => set
 
   end type control_t
 
@@ -53,15 +54,25 @@ contains
   !!
   !! @param self This object.
   !! @param name The atom name (2 character limit).
-  !! @param x Position, x-component.
-  !! @param y Position, y-component.
-  !! @param z Position, z-component.
-  subroutine add_atom (self, name, x, y, z)
+  !! @param x Position vector.
+  subroutine add_atom (self, name, x)
 
     class(control_t), intent(inout) :: self
     character(len = 2), intent(in) :: name
-    real(kind(0d0)), intent(in) :: x, y, z
+    real(kind(0d0)), intent(in) :: x(3)
 
   end subroutine add_atom
+
+  !> Set the control object to another one (deep copy).
+  !!
+  !! @todo Implement.
+  !! @param self This object.
+  !! @param c The control object to copy.
+  subroutine set (self, c)
+
+    class(control_t), intent(inout) :: self
+    type(control_t), intent(in) :: c
+
+  end subroutine set
 
 end module control_class
