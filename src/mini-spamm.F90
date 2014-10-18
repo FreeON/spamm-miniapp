@@ -8,6 +8,7 @@
 !> The front-end.
 program mini_spamm
 
+  use control_class
   use logging
   use parser
 
@@ -23,7 +24,6 @@ program mini_spamm
   call get_command_argument(1, input_file)
   control = parse_input(input_file)
 
-  call log_info("parsed input file")
-  call print_geometry(control%geometry)
+  call control%print()
 
 end program mini_spamm

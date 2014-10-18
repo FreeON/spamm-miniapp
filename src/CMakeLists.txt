@@ -1,4 +1,5 @@
 add_executable( mini-spamm
+  control_class.F90
   lexer.c
   logging.F90
   mini-spamm.F90
