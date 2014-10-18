@@ -8,6 +8,7 @@ struct control_t *control;
 void free_atom (struct atom_t *atom);
 void free_atoms (struct atomlist_t *atoms);
 void free_control (struct control_t *control);
+void parser_add_atom (char *name, double *x, double *y, double *z);
 %}
 
 %union{
@@ -113,6 +114,7 @@ atom: ID float_value float_value float_value
         $$->x[0] = $2;
         $$->x[1] = $3;
         $$->x[2] = $4;
+        parser_add_atom($1, &$2, &$3, &$4);
       }
       ;
 

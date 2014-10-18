@@ -52,17 +52,15 @@ contains
   !> Add an atom to the geometry.
   !!
   !! @param self This object.
-  !! @param name The atom name (2 character char array).
+  !! @param name The atom name (2 character limit).
   !! @param x Position, x-component.
   !! @param y Position, y-component.
   !! @param z Position, z-component.
   subroutine add_atom (self, name, x, y, z)
 
-    use, intrinsic :: iso_C_binding
-
     class(control_t), intent(inout) :: self
-    character(C_CHAR), dimension(2), intent(in) :: name
-    real(C_DOUBLE), intent(in) :: x, y, z
+    character(len = 2), intent(in) :: name
+    real(kind(0d0)), intent(in) :: x, y, z
 
   end subroutine add_atom
 
