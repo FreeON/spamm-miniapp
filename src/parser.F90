@@ -6,6 +6,10 @@ module parser
 
   implicit none
 
+  private
+
+  public :: parse_input
+
   !> The C interface to the Bison parser.
   interface
     !> The interface to the Bison parser.
@@ -22,8 +26,6 @@ module parser
   !> The parsed control object. We keep this here so we can call back from the parser and modify it.
   type(control_t), pointer, save :: control_temp
 
-  logical, save :: geometry_set
-
 contains
 
   !> Parse the input file.
@@ -37,13 +39,9 @@ contains
     character(len = :), allocatable :: buffer
     integer :: i
 
-    geometry_set = .false.
     allocate(control_temp)
     parse_input => control_temp
     call parse_input_file(len_trim(filename), trim(filename))
-    if(.not. geometry_set) then
-      call log_fatal("missing geometry")
-    endif
 
   end function parse_input
 
@@ -71,17 +69,5 @@ contains
     call control_temp%add_atom(atom_name, [ x, y, z ])
 
   end subroutine parser_add_atom
-
-  subroutine close_geometry () bind(C, name = "close_geometry")
-
-    use, intrinsic :: iso_C_binding
-
-    if(geometry_set) then
-      call log_fatal("duplicate geometry block")
-    endif
-
-    geometry_set = .true.
-
-  end subroutine close_geometry
 
 end module parser

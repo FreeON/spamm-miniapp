@@ -12,6 +12,7 @@ add_executable( mini-spamm
 target_link_libraries( mini-spamm ${FLEX_LIBRARIES} )
 set_target_properties( mini-spamm
   PROPERTIES
+  COMPILE_DEFINITIONS YYERROR_VERBOSE
   RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )
 
 #bison_target( parser parser.y parser.c )

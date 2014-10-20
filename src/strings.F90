@@ -3,6 +3,10 @@ module strings
 
   implicit none
 
+  private
+
+  public :: to_string
+
   !> The interface for converting things to strings.
   interface to_string
     module procedure :: int_to_string

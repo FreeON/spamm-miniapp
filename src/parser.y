@@ -5,6 +5,7 @@
 #include "ptypes.h"
 int yydebug = 1;
 struct control_t *control;
+void yyerror(const char *msg);
 void free_atom (struct atom_t *atom);
 void free_atoms (struct atomlist_t *atoms);
 void free_control (struct control_t *control);
@@ -33,22 +34,24 @@ void parser_add_atom (char *name, double *x, double *y, double *z);
 %type <atoms> geometry
 %type <control> input
 
+%locations
+
 %start input
 
 %locations
 
-%destructor { free($$); } <string>;
-%destructor { free_atom($$); } <atom>;
+%destructor { if($$) free($$); } <string>;
+%destructor { if($$) free_atom($$); } <atom>;
 %destructor { free_atoms($$); } <atoms>;
 %destructor { free_control($$); } <control>;
 
 %printer { fprintf(yyoutput, "%s", $$); } <string>
 %printer { fprintf(yyoutput, "%f", $$); } <float_val>
 %printer {
-  fprintf(yyoutput, "%s %f %f %f", $$->name, $$->x[0], $$->x[1], $$->x[2]);
+  if($$) fprintf(yyoutput, "%s %f %f %f", $$->name, $$->x[0], $$->x[1], $$->x[2]);
 } <atom>
 %printer {
-  fprintf(yyoutput, "%d atoms", $$->number_atoms);
+  if($$) fprintf(yyoutput, "%d atoms", $$->number_atoms);
 } <atoms>
 %printer {
   if($$->atoms != NULL)
@@ -71,8 +74,11 @@ input: /* empty */
        {
          yyerror("duplicate geometry entry");
        }
-       $$ = calloc(1, sizeof(struct control_t)); 
-       $$->atoms = $2;
+       else
+       {
+         $$ = calloc(1, sizeof(struct control_t));
+         $$->atoms = $2;
+       }
      }
      ;
 
@@ -81,8 +87,6 @@ geometry: BEGIN_GEOMETRY atom_list END_GEOMETRY
           $$ = calloc(1, sizeof(struct atomlist_t));
           $$->number_atoms = $2->number_atoms;
           $$->atoms = $2->atoms;
-          /* Call up to parser.F90 */
-          close_geometry();
         }
         ;
 
@@ -127,10 +131,9 @@ float_value: INT_LITERAL { $$ = $1; }
 
 %%
 
-int yyerror (const char *s)
+void yyerror (const char *s)
 {
-  printf("%s on line %d-%d\n", s,
-         yylloc.first_line, yylloc.last_line);
+  fprintf(stderr, "%s\n", s);
   exit(1);
 }
 

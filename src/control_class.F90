@@ -24,23 +24,13 @@ module control_class
 
     procedure, pass :: print => print_control
     procedure, pass :: add_atom => add_atom
-    procedure, pass :: set => set
 
   end type control_t
 
 contains
 
   !> Print the geometry.
-  subroutine print_geometry ()
-
-    use strings
-
-  end subroutine print_geometry
-
-  !> Print the control structure.
-  !!
-  !! @param self This object.
-  subroutine print_control (self)
+  subroutine print_geometry (self)
 
     use logging
     use strings
@@ -48,7 +38,6 @@ contains
     class(control_t), intent(in) :: self
     integer :: i
 
-    call log_always("control")
     if(allocated(self%atoms)) then
       call log_always(to_string(size(self%atoms))//" atoms")
       do i = 1, size(self%atoms)
@@ -60,6 +49,17 @@ contains
     else
       call log_always("empty geometry")
     endif
+
+  end subroutine print_geometry
+
+  !> Print the control structure.
+  !!
+  !! @param self This object.
+  subroutine print_control (self)
+
+    class(control_t), intent(in) :: self
+
+    call print_geometry(self)
 
   end subroutine print_control
 
@@ -95,17 +95,5 @@ contains
     self%atoms(size(self%atoms))%x = x
 
   end subroutine add_atom
-
-  !> Set the control object to another one (deep copy).
-  !!
-  !! @todo Implement.
-  !! @param self This object.
-  !! @param c The control object to copy.
-  subroutine set (self, c)
-
-    class(control_t), intent(inout) :: self
-    type(control_t), intent(in) :: c
-
-  end subroutine set
 
 end module control_class
