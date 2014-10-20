@@ -48,17 +48,17 @@ contains
     class(control_t), intent(in) :: self
     integer :: i
 
-    call log_info("control")
+    call log_always("control")
     if(allocated(self%atoms)) then
-      call log_info(to_string(size(self%atoms))//" atoms")
+      call log_always(to_string(size(self%atoms))//" atoms")
       do i = 1, size(self%atoms)
-        call log_info(self%atoms(i)%name//" "// &
+        call log_always(self%atoms(i)%name//" "// &
           to_string(self%atoms(i)%x(1))//" "// &
           to_string(self%atoms(i)%x(2))//" "// &
           to_string(self%atoms(i)%x(3)))
       enddo
     else
-      call log_info("empty geometry")
+      call log_always("empty geometry")
     endif
 
   end subroutine print_control
