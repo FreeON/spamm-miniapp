@@ -4,6 +4,8 @@
 #include <string.h>
 #include "ptypes.h"
 int yydebug = 1;
+extern int yylineno;
+extern char *yytext;
 struct control_t *control;
 void yyerror(const char *msg);
 void free_atom (struct atom_t *atom);
@@ -21,12 +23,12 @@ void parser_add_atom (char *name, double *x, double *y, double *z);
   struct control_t *control;
 }
 
-%token BEGIN_GEOMETRY
-%token END_GEOMETRY
+%token BEGIN_GEOMETRY "<BeginGeometry>"
+%token END_GEOMETRY "<EndGeometry>"
 %token EOL
 %token <string> ID
-%token <float_val> FLOAT_LITERAL
-%token <int_val> INT_LITERAL
+%token <float_val> FLOAT_LITERAL "a float literal"
+%token <int_val> INT_LITERAL "an integer literal"
 
 %type <float_val> float_value
 %type <atom> atom
@@ -133,7 +135,7 @@ float_value: INT_LITERAL { $$ = $1; }
 
 void yyerror (const char *s)
 {
-  fprintf(stderr, "%s\n", s);
+  fprintf(stderr, "%s on line %d, unexpected \"%s\"\n", s, yylineno, yytext);
   exit(1);
 }
 

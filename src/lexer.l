@@ -2,6 +2,8 @@
 #include "parser.h"
 %}
 
+%option yylineno
+
 %%
 
 "<BeginGeometry>"       { return BEGIN_GEOMETRY; }
