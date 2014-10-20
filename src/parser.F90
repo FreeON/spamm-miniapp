@@ -20,7 +20,7 @@ module parser
   end interface
 
   !> The parsed control object. We keep this here so we can call back from the parser and modify it.
-  type(control_t), save :: control_temp
+  type(control_t), pointer, save :: control_temp
 
   logical, save :: geometry_set
 
@@ -32,14 +32,18 @@ contains
   !! @return A parser::control object.
   function parse_input (filename)
 
-    type(control_t) :: parse_input
+    type(control_t), pointer :: parse_input
     character(len = *), intent(in) :: filename
     character(len = :), allocatable :: buffer
     integer :: i
 
     geometry_set = .false.
+    allocate(control_temp)
+    parse_input => control_temp
     call parse_input_file(len_trim(filename), trim(filename))
-    call parse_input%set(control_temp)
+    if(.not. geometry_set) then
+      call log_fatal("missing geometry")
+    endif
 
   end function parse_input
 

@@ -43,10 +43,23 @@ contains
   subroutine print_control (self)
 
     use logging
+    use strings
 
     class(control_t), intent(in) :: self
+    integer :: i
 
     call log_info("control")
+    if(allocated(self%atoms)) then
+      call log_info(to_string(size(self%atoms))//" atoms")
+      do i = 1, size(self%atoms)
+        call log_info(self%atoms(i)%name//" "// &
+          to_string(self%atoms(i)%x(1))//" "// &
+          to_string(self%atoms(i)%x(2))//" "// &
+          to_string(self%atoms(i)%x(3)))
+      enddo
+    else
+      call log_info("empty geometry")
+    endif
 
   end subroutine print_control
 
@@ -60,6 +73,26 @@ contains
     class(control_t), intent(inout) :: self
     character(len = 2), intent(in) :: name
     real(kind(0d0)), intent(in) :: x(3)
+    type(atom_t), allocatable :: atoms_temp(:)
+    integer :: i
+
+    if(.not. allocated(self%atoms)) then
+      allocate(self%atoms(1))
+    else
+      allocate(atoms_temp(size(self%atoms)))
+      do i = 1, size(self%atoms)
+        atoms_temp(i)%name = self%atoms(i)%name
+        atoms_temp(i)%x = self%atoms(i)%x
+      enddo
+      deallocate(self%atoms)
+      allocate(self%atoms(size(atoms_temp)+1))
+      do i = 1, size(atoms_temp)
+        self%atoms(i)%name = atoms_temp(i)%name
+        self%atoms(i)%x = atoms_temp(i)%x
+      enddo
+    endif
+    self%atoms(size(self%atoms))%name = name
+    self%atoms(size(self%atoms))%x = x
 
   end subroutine add_atom
 
