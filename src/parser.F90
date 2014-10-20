@@ -9,9 +9,14 @@ module parser
   !> The C interface to the Bison parser.
   interface
     !> The interface to the Bison parser.
-    subroutine yyparse () bind(C)
+    !!
+    !! @param length The string length of the filename.
+    !! @param filename The filename.
+    subroutine parse_input_file (length, filename) bind(C)
       use, intrinsic :: iso_C_binding
-    end subroutine yyparse
+      integer(C_INT), intent(in) :: length
+      character(C_CHAR), intent(in) :: filename
+    end subroutine parse_input_file
   end interface
 
   !> The parsed control object. We keep this here so we can call back from the parser and modify it.
@@ -33,7 +38,7 @@ contains
     integer :: i
 
     geometry_set = .false.
-    call yyparse()
+    call parse_input_file(len_trim(filename), trim(filename))
     call parse_input%set(control_temp)
 
   end function parse_input
