@@ -4,3 +4,6 @@ H 1   2 3 # The geomtry consists of one line per atom.
 H 4.2 5 6 # Each line starts with the atom name
 O 1   4 3 # and the position in Angstrom.
 <EndGeometry>
+
+<BeginGeometry>
+<EndGeometry>
