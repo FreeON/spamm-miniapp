@@ -5,12 +5,7 @@
 #include "ptypes.h"
 int yydebug = 1;
 extern int yylineno;
-extern char *yytext;
-struct control_t *control;
 void yyerror(const char *msg);
-void free_atom (struct atom_t *atom);
-void free_atoms (struct atomlist_t *atoms);
-void free_control (struct control_t *control);
 void parser_add_atom (char *name, double *x, double *y, double *z);
 %}
 
