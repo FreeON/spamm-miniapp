@@ -2,6 +2,7 @@
 #include "parser.h"
 %}
 
+/* Track line numbers during parsing. */
 %option yylineno
 
 %%

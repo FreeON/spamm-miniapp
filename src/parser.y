@@ -4,8 +4,14 @@
 #include <string.h>
 #include "ptypes.h"
 int yydebug = 1;
+
+/** The line numbers from the lexer. */
 extern int yylineno;
+
+/** Interface for the error reporting function. */
 void yyerror(const char *msg);
+
+/** From parser.F90. */
 void parser_add_atom (char *name, double *x, double *y, double *z);
 %}
 
@@ -23,15 +29,13 @@ void parser_add_atom (char *name, double *x, double *y, double *z);
 
 %type <float_val> float_value
 
-%locations
-
 %start input
 
 %locations
 
 %destructor { if($$) free($$); } <string>;
 
-%printer { fprintf(yyoutput, "%s", $$); } <string>
+%printer { if($$) fprintf(yyoutput, "%s", $$); } <string>
 %printer { fprintf(yyoutput, "%f", $$); } <float_val>
 
 %%
