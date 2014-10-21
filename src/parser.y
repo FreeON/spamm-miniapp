@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ptypes.h"
+
+/** Enable tracing of the parser. */
 int yydebug = 1;
 
 /** The line numbers from the lexer. */

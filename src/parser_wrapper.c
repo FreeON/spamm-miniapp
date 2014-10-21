@@ -9,11 +9,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "ptypes.h"
-
 /** Parse the input.
  *
- * @todo Not implemented yet.
  * @param length The length of the filename.
  * @param filename The input file.
  */
