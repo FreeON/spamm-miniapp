@@ -1,35 +1,26 @@
+flex_target( lexer lexer.l ${CMAKE_CURRENT_BINARY_DIR}/lexer.c )
+bison_target( parser parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.c )
+add_flex_bison_dependency( lexer parser )
+
+include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
+
 add_executable( mini-spamm
+  ${BISON_parser_OUTPUTS}
+  ${FLEX_lexer_OUTPUTS}
   control_class.F90
-  lexer.c
   logging.F90
   mini-spamm.F90
   parser.F90
-  parser.c
   parser_wrapper.c
   strings.F90
   )
 
 target_link_libraries( mini-spamm ${FLEX_LIBRARIES} )
+
 set_target_properties( mini-spamm
   PROPERTIES
   COMPILE_DEFINITIONS "YYERROR_VERBOSE;YYDEBUG=$<BOOL:${PARSER_DEBUG}>"
   RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )
-
-message( STATUS ${PARSER_DEBUG} )
-
-# This approach seems to be missing build dependencies.
-#bison_target( parser parser.y parser.c )
-#flex_target( lexer lexer.l lexer.c )
-#add_flex_bison_dependency( lexer parser )
-
-add_custom_command( OUTPUT parser.c
-  COMMAND ${BISON_EXECUTABLE} -o parser.c -v -d parser.y
-  DEPENDS parser.y )
-add_custom_command( OUTPUT lexer.c
-  COMMAND ${FLEX_EXECUTABLE} -o lexer.c lexer.l
-  DEPENDS lexer.l parser.c )
-
-include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
 
 install( TARGETS mini-spamm
   RUNTIME DESTINATION bin

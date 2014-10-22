@@ -40,7 +40,7 @@ void parser_add_atom (char *name, double *x, double *y, double *z);
 
 %locations
 
-%destructor { if($$) free($$); } <string>;
+%destructor { if($$) free($$); } <string>
 
 %printer { if($$) fprintf(yyoutput, "%s", $$); } <string>
 %printer { fprintf(yyoutput, "%f", $$); } <float_val>
