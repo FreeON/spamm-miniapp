@@ -6,6 +6,8 @@ title: Spamm Miniapp
 Spamm Mini-App
 --------------
 
+Still in very early developement.
+
 Please go to the FreeON project at [www.freeon.org](http://www.freeon.org) for
 more details.
 
