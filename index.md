@@ -15,7 +15,7 @@ Spammpack
 ---------
 
 The mini-app is based on Spammpack, which can be found at
-(http://freeon.github.io/spammpack)[http://freeon.github.io/spammpack].
+[http://freeon.github.io/spammpack](http://freeon.github.io/spammpack).
 
 Authors
 -------
