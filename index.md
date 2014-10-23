@@ -13,6 +13,11 @@ more details.
 
 {% include thin_add.html %}
 
+Project Statistics
+------------------
+
+{% include openhub.html %}
+
 Spammpack
 ---------
 
