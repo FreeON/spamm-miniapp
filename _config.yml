@@ -1,0 +1,10 @@
+gems:
+  - jekyll-mentions
+
+footer-links:
+  github: nicolasbock
+
+pages_list:
+  Main: "/spamm-miniapp/"
+
+baseurl: "/spamm-miniapp"
