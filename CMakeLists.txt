@@ -28,7 +28,6 @@ if( NOT CMAKE_BUILD_TYPE )
 endif()
 
 if( CMAKE_Fortran_COMPILER_ID STREQUAL "GNU" )
-  message( STATUS "Setting default GNU compiler flags" )
   set( CMAKE_C_FLAGS_DEBUG "-O0 -g" )
   set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all" )
 endif()
