@@ -17,9 +17,14 @@ add_executable( mini-spamm
 
 target_link_libraries( mini-spamm ${FLEX_LIBRARIES} )
 
+set( EXTRA_DEFINITIONS YYERROR_VERBOSE )
+if( PARSER_DEBUG )
+  set( EXTRA_DEFINITIONS "${EXTRA_DEFINITIONS};YYDEBUG" )
+endif()
+
 set_target_properties( mini-spamm
   PROPERTIES
-  COMPILE_DEFINITIONS "YYERROR_VERBOSE;YYDEBUG=$<BOOL:${PARSER_DEBUG}>"
+  COMPILE_DEFINITIONS "${EXTRA_DEFINITIONS}"
   RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )
 
 install( TARGETS mini-spamm
