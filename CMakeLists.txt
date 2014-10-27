@@ -35,3 +35,7 @@ if( CMAKE_Fortran_COMPILER_ID STREQUAL "GNU" )
 endif()
 
 add_subdirectory( src )
+
+enable_testing()
+
+add_test( parse1 ${CMAKE_BINARY_DIR}/mini-spamm test-1.inp )
