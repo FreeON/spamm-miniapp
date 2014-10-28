@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Spamm Miniapp
+title: Spamm Mini-App
 ---
 
 Spamm Mini-App
