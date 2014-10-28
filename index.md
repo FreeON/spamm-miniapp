@@ -26,7 +26,7 @@ The mini-app is based on [Spammpack](http://freeon.github.io/spammpack).
 Authors
 -------
 
-The principal authors of spammpack are:
+The principal authors of the Spamm Mini-App are:
 
   - Matt Challacombe @mattchallacombe
   - Nicolas Bock @nicolasbock
