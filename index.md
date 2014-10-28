@@ -21,8 +21,7 @@ Project Statistics
 Spammpack
 ---------
 
-The mini-app is based on
-[http://freeon.github.io/spammpack](http://freeon.github.io/spammpack).
+The mini-app is based on [Spammpack](http://freeon.github.io/spammpack).
 
 Authors
 -------
