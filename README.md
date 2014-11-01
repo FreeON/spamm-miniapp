@@ -3,4 +3,4 @@ License
 
 Licensed under the BSD-3-Clause license.
 
-Please visit http://www.freeon.org/ for more details.
+Please visit http://freeon.github.io/spamm-miniapp for more details.
