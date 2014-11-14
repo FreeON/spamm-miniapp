@@ -1,5 +1,6 @@
 gems:
   - jekyll-mentions
+  - jekyll-sitemap
 
 footer-links:
   github: nicolasbock
@@ -7,4 +8,5 @@ footer-links:
 pages_list:
   Main: "/spamm-miniapp/"
 
+url: http://www.freeon.org/spamm-miniapp
 baseurl: "/spamm-miniapp"
