@@ -8,7 +8,7 @@ Spamm Mini-App
 
 Still in very early developement.
 
-{% include thin_medium_add.html %}
+{% include responsive_ad.html %}
 
 Project Statistics
 ------------------
