@@ -8,6 +8,11 @@ Still in very early developement.
 
 {% include responsive_ad.html %}
 
+# License
+
+The Spamm Mini-App is licensed under the [BSD 3-clause
+license](http://opensource.org/licenses/BSD-3-Clause).
+
 # Project Statistics
 
 {% include openhub.html %}
