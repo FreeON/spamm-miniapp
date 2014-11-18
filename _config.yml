@@ -8,5 +8,12 @@ footer-links:
 pages_list:
   Main: "/spamm-miniapp/"
 
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+
 url: http://www.freeon.org/spamm-miniapp
 baseurl: "/spamm-miniapp"

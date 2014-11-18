@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Spamm Mini-App
 ---
 
@@ -12,6 +11,14 @@ Still in very early developement.
 # Project Statistics
 
 {% include openhub.html %}
+
+# Testing
+
+We let
+[Travis-CI](https://travis-ci.org)
+run through the Mini-App's test suite.  The latest result of this build/test
+process is shown on the right. Current condition:
+[![](https://travis-ci.org/FreeON/spammpack-miniapp.svg)](https://travis-ci.org/FreeON/spammpack-miniapp).
 
 # Authors
 
