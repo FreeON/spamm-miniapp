@@ -3,20 +3,17 @@ layout: default
 title: Spamm Mini-App
 ---
 
-Spamm Mini-App
---------------
+# Spamm Mini-App
 
 Still in very early developement.
 
 {% include responsive_ad.html %}
 
-Project Statistics
-------------------
+# Project Statistics
 
 {% include openhub.html %}
 
-Authors
--------
+# Authors
 
 The principal authors of the Spamm Mini-App are:
 
